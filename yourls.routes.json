@@ -1,0 +1,89 @@
+{
+  "source": "YOURLS 1.10.6 yourls-api.php and includes/functions-api.php (MIT). Route list derived by hand; no code copied.",
+  "version": "1.10.6",
+  "core": ["shorturl", "expand", "url-stats", "stats", "db-stats", "version"],
+  "actions": [
+    {
+      "action": "shorturl",
+      "yourlsAction": "shorturl",
+      "toolset": "links",
+      "write": true,
+      "destructive": false,
+      "summary": "Create a short URL for a long URL. Optional keyword and title.",
+      "fields": [
+        { "name": "url", "type": "string", "required": true },
+        { "name": "keyword", "type": "string", "required": false },
+        { "name": "title", "type": "string", "required": false }
+      ],
+      "sampleParams": { "url": "https://example.com/mcp-live", "keyword": "mcpkw" }
+    },
+    {
+      "action": "expand",
+      "yourlsAction": "expand",
+      "toolset": "links",
+      "write": false,
+      "destructive": false,
+      "summary": "Expand a short URL or keyword to the long URL.",
+      "fields": [{ "name": "shorturl", "type": "string", "required": true }],
+      "sampleParams": { "shorturl": "mcpkw" }
+    },
+    {
+      "action": "url_stats",
+      "yourlsAction": "url-stats",
+      "toolset": "links",
+      "write": false,
+      "destructive": false,
+      "summary": "Click and title stats for one short URL or keyword.",
+      "fields": [{ "name": "shorturl", "type": "string", "required": true }],
+      "sampleParams": { "shorturl": "mcpkw" }
+    },
+    {
+      "action": "stats",
+      "yourlsAction": "stats",
+      "toolset": "stats",
+      "write": false,
+      "destructive": false,
+      "summary": "List short URLs. filter is top, bottom, rand, or last. limit and start paginate.",
+      "fields": [
+        { "name": "filter", "type": "string", "required": false },
+        { "name": "limit", "type": "integer", "required": false },
+        { "name": "start", "type": "integer", "required": false }
+      ],
+      "sampleParams": { "filter": "top", "limit": "10", "start": "0" }
+    },
+    {
+      "action": "db_stats",
+      "yourlsAction": "db-stats",
+      "toolset": "stats",
+      "write": false,
+      "destructive": false,
+      "summary": "Global counts of short URLs and clicks.",
+      "fields": [],
+      "sampleParams": {}
+    },
+    {
+      "action": "version",
+      "yourlsAction": "version",
+      "toolset": "meta",
+      "write": false,
+      "destructive": false,
+      "summary": "YOURLS version. Set db to 1 to include db_version.",
+      "fields": [{ "name": "db", "type": "integer", "required": false }],
+      "sampleParams": { "db": "1" }
+    }
+  ],
+  "exclusions": [
+    {
+      "action": "delete",
+      "reason": "Not a core YOURLS 1.10.6 API action. Needs a plugin such as API Delete."
+    },
+    {
+      "action": "update",
+      "reason": "Not a core YOURLS 1.10.6 API action. Needs a plugin such as API Edit URL."
+    },
+    {
+      "action": "edit",
+      "reason": "Not a core YOURLS 1.10.6 API action. Admin AJAX edit_save is cookie plus nonce, not yourls-api.php."
+    }
+  ]
+}
